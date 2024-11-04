@@ -1,0 +1,10 @@
+.searchBlock {
+  margin-bottom: 20px;
+}
+.searchInput {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 6px;
+  border-radius: 5px;
+  outline: transparent;
+}
