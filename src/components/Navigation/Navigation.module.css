@@ -1,0 +1,7 @@
+.navigationPage {
+  display: flex;
+  gap: 15px;
+}
+.linkPage:hover {
+  text-decoration: underline;
+}
