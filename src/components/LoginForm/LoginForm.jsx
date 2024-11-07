@@ -1,16 +1,23 @@
 import { ErrorMessage, Field, Formik, Form } from 'formik';
+import css from './LoginForm.module.css';
 
 export default function LoginForm() {
   return (
     <Formik initialValues={{ email: '', password: '' }}>
-      <Form>
-        <label>Email</label>
-        <Field type="email" name="email"></Field>
+      <Form className={css.formLogin}>
+        <label className={css.textLogin}>Email</label>
+        <Field className={css.inputLogin} type="email" name="email"></Field>
         <ErrorMessage name="email" component="span" />
-        <label>Password</label>
-        <Field type="password" name="password"></Field>
+        <label className={css.textLogin}>Password</label>
+        <Field
+          className={css.inputLogin}
+          type="password"
+          name="password"
+        ></Field>
         <ErrorMessage name="password" component="span" />
-        <button type="submit">Log In</button>
+        <button className={css.btnLogin} type="submit">
+          Log In
+        </button>
       </Form>
     </Formik>
   );
