@@ -6,4 +6,10 @@
 .btnUserMenu {
   padding: 3px 10px;
   border-radius: 10px;
+  background-color: rgb(186, 154, 218);
+  border-color: rebeccapurple;
+}
+.name {
+  font-weight: 700;
+  font-size: 18px;
 }

@@ -13,7 +13,9 @@ export default function UserMenu() {
 
   return (
     <div className={css.userMenu}>
-      <p>Welcome, {user.name}!</p>
+      <p>
+        Welcome, <span className={css.name}>{user.name}</span>!
+      </p>
       <button type="button" onClick={handleSubmit} className={css.btnUserMenu}>
         Logout
       </button>

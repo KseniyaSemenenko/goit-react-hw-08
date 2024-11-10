@@ -15,44 +15,53 @@ export const clearToken = () => {
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (user, thunkAPI) => {
+  async (user, thunkApi) => {
     try {
       const response = await authInstance.post('/users/signup', user);
       setToken(response.data.token);
       return response.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkApi.rejectWithValue(err.message);
     }
   }
 );
 
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (user, thunkApi) => {
   try {
     const response = await authInstance.post('/users/login', user);
     setToken(response.data.token);
     return response.data;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+    return thunkApi.rejectWithValue(err.message);
   }
 });
 
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logout = createAsyncThunk('auth/logout', async (_, thunkApi) => {
   try {
     const response = await authInstance.post('/users/logout');
-    return response;
+    clearToken();
+    return response.data;
   } catch (err) {
-    return thunkAPI.rejectWithValue(err.message);
+    return thunkApi.rejectWithValue(err.message);
   }
 });
 
-// export const refreshUser = createAsyncThunk(
-//   'auth/refresh',
-//   async (token, thunkAPI) => {
-//     try {
-//       const response = await authInstance.get('/users/current', token);
-//       return response;
-//     } catch (err) {
-//       return thunkAPI.rejectWithValue(err.message);
-//     }
-//   }
-// );
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    const token = state.auth.token;
+
+    if (!token) {
+      return thunkApi.rejectWithValue('Login failed! Sign in to your account!');
+    }
+
+    try {
+      setToken(token);
+      const response = await authInstance.get('/users/current');
+      return response.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
+  }
+);

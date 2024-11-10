@@ -3,8 +3,10 @@
   gap: 25px;
 }
 .link {
+  padding: 5px 10px;
   font-weight: 700;
 }
-.link.active {
-  color: brown;
+.active {
+  border: 1px solid black;
+  border-radius: 4px;
 }
